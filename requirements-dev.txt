@@ -1,0 +1,11 @@
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+jupyter
+pytest
+ruff
+black
+mypy
+python-dotenv
