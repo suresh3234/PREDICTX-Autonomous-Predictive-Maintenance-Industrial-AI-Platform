@@ -29,6 +29,8 @@ jobs:
         pip install pytest pytest-cov
 
     - name: Run Pytest Test Suite
+      env:
+        PYTHONPATH: .
       run: |
         pytest --cov=src --cov=apps/api --cov=ml --cov=rag --cov=agents --cov=mcp --cov-report=xml
 

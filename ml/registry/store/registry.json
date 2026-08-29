@@ -245,6 +245,30 @@
                     "reason": "Initial model registration as candidate."
                 }
             ]
+        },
+        "1.0.10": {
+            "version": "1.0.10",
+            "status": "CANDIDATE",
+            "metrics": {
+                "F1-Score": 0.49962602842183995
+            },
+            "hyperparameters": {
+                "nu": 0.1
+            },
+            "dataset_lineage": "C:\\Projects\\PredictX\\data\\synthetic\\sensor_readings.csv",
+            "created_at": "2026-08-29T17:36:14.482594Z",
+            "artifacts": {
+                "model": "C:\\Projects\\PredictX\\ml\\registry\\store\\anomaly_detection\\1.0.10\\model_model.pkl",
+                "scaler": "C:\\Projects\\PredictX\\ml\\registry\\store\\anomaly_detection\\1.0.10\\scaler_scaler.pkl"
+            },
+            "transition_audit": [
+                {
+                    "from_status": "NONE",
+                    "to_status": "CANDIDATE",
+                    "timestamp": "2026-08-29T17:36:14.482594Z",
+                    "reason": "Initial model registration as candidate."
+                }
+            ]
         }
     },
     "failure_classification": {

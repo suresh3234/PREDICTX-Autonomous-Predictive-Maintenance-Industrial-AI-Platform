@@ -1,0 +1,44 @@
+# Core Framework & Server
+fastapi>=0.110.0
+uvicorn[standard]>=0.28.0
+pydantic>=2.6.0
+pydantic-settings>=2.2.0
+python-dotenv>=1.0.0
+python-json-logger>=2.0.0
+PyYAML>=6.0.1
+httpx>=0.27.0
+psutil>=5.9.0
+
+# Database & Migrations
+SQLAlchemy>=2.0.28
+psycopg-binary>=3.1.18
+alembic>=1.13.1
+
+# Machine Learning & Data Processing
+numpy>=1.26.0,<3.0.0
+pandas>=2.2.0
+scipy>=1.12.0
+scikit-learn>=1.4.0
+xgboost>=2.0.3
+lightgbm>=4.3.0
+joblib>=1.3.2
+
+# Deep Learning & Embeddings
+torch>=2.2.0
+transformers>=4.38.0
+sentence-transformers>=2.5.0
+rank-bm25>=0.2.2
+
+# Streaming & Messaging
+kafka-python-ng>=2.2.2
+
+# Observability & Metrics
+prometheus-client>=0.20.0
+
+# Security
+argon2-cffi>=23.1.0
+
+# Testing & Quality
+pytest>=8.1.0
+pytest-cov>=4.1.0
+pytest-asyncio>=0.23.0
