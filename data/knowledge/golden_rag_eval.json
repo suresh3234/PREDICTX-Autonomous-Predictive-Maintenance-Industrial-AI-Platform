@@ -1,0 +1,57 @@
+[
+  {
+    "id": "eval_01",
+    "query": "Why is machine M1000 vibrating above 3.5 mm/s and what should I do?",
+    "ground_truth_doc_id": "man_bearing_wear",
+    "expected_facts": [
+      "bearing degradation",
+      "shut down the machine immediately",
+      "replace defective ball bearings",
+      "pack with lithium grease",
+      "loose foundation bolts"
+    ]
+  },
+  {
+    "id": "eval_02",
+    "query": "How to resolve temperature readings surpassing 75 degrees Celsius?",
+    "ground_truth_doc_id": "man_overheating",
+    "expected_facts": [
+      "coolant level",
+      "clean external radiator fins",
+      "cooling fan activation",
+      "reduce operational load"
+    ]
+  },
+  {
+    "id": "eval_03",
+    "query": "What steps are required when hydraulic pressure drops below 80 PSI under load?",
+    "ground_truth_doc_id": "man_pressure_leak",
+    "expected_facts": [
+      "shut off fluid input lines",
+      "high-pressure O-ring gaskets",
+      "retorque loose bolts to 120 Nm",
+      "replace cracked gaskets"
+    ]
+  },
+  {
+    "id": "eval_04",
+    "query": "Abnormal current draw spikes exceeding 15 Amperes troubleshooting procedure",
+    "ground_truth_doc_id": "man_electrical_fault",
+    "expected_facts": [
+      "measure current draw across three phase windings",
+      "winding isolation resistance",
+      "megohmmeter",
+      "inspect power cable insulation"
+    ]
+  },
+  {
+    "id": "eval_05",
+    "query": "What is the weekly maintenance procedure for radiator fans and dust buildup?",
+    "ground_truth_doc_id": "man_cooling_clog",
+    "expected_facts": [
+      "vacuum external filters weekly",
+      "clean dust and debris",
+      "replace cooling fan motors exceeding 2.0 Amperes"
+    ]
+  }
+]

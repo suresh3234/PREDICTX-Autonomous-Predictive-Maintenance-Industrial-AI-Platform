@@ -1,0 +1,29 @@
+groups:
+  - name: predictx_alerts
+    rules:
+      - alert: HighEquipmentAnomalies
+        expr: increase(predictx_anomalies_detected_total{severity="CRITICAL"}[5m]) > 3
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Spike in Critical Equipment Anomalies"
+          description: "Machine {{ $labels.machine_id }} has experienced multiple critical degradation alerts within 5 minutes."
+
+      - alert: SignificantFeatureDrift
+        expr: predictx_model_drift_score > 0.05
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Statistical Data Drift Detected"
+          description: "Feature {{ $labels.feature }} has drifted significantly (p-value < 0.05), triggering automated retraining."
+
+      - alert: HighInferenceLatency
+        expr: rate(predictx_inference_latency_seconds_sum[5m]) / rate(predictx_inference_latency_seconds_count[5m]) > 1.0
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "ML Inference Latency Degradation"
+          description: "Model {{ $labels.model_type }} average inference duration exceeds 1.0 second."

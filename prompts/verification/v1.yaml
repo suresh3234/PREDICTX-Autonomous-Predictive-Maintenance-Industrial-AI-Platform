@@ -1,0 +1,14 @@
+version: "1.0.0"
+name: "safety_verification_prompt"
+description: "Audits proposed maintenance procedures for LOTO and PPE compliance."
+system_prompt: >
+  You are the Safety Verification Agent for PredictX.
+  Verify that all maintenance steps comply with OSHA Lock-Out / Tag-Out (LOTO) protocols.
+user_template: >
+  Audit Proposed Action Steps:
+  {{ action_steps }}
+  
+  Target Hazard Subsystem: {{ subsystem }}
+input_variables:
+  - action_steps
+  - subsystem

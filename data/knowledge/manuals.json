@@ -1,0 +1,27 @@
+[
+  {
+    "id": "man_bearing_wear",
+    "text": "Bearing wear troubleshooting guide: Abnormal vibration levels exceeding 3.5 mm/s accompanied by high-frequency squealing noise indicates critical bearing degradation. Action: Shut down the machine immediately. Verify housing alignment. Replace defective ball bearings, clean the shaft coupling, and pack with lithium grease. Check for loose foundation bolts.",
+    "metadata": {"source": "Mechanical Manual Section 4.2", "category": "vibration", "target_system": "Bearings"}
+  },
+  {
+    "id": "man_overheating",
+    "text": "Overheating and thermal dissipation failure procedure: Temperature readings surpassing 75 degrees Celsius indicate severe thermal buildup. Action: Inspect cooling system coolant level and fluid lines for clogging. Clean the external radiator fins. Verify cooling fan activation. Reduce load if operational duty cycle is exceeding 90 percent.",
+    "metadata": {"source": "Thermal Systems Manual Section 1.5", "category": "temperature", "target_system": "Cooling System"}
+  },
+  {
+    "id": "man_pressure_leak",
+    "text": "Pressure leak and fluid seal repair: Sudden pressure drop below 80 PSI under standard load suggests a fluid seal rupture or leak. Action: Shut off fluid input lines. Inspect the high-pressure O-ring gaskets and primary pipe couplings. Retorque all loose bolts on the pressure housing to 120 Nm. Replace cracked gaskets.",
+    "metadata": {"source": "Hydraulic Manual Section 3.1", "category": "pressure", "target_system": "Hydraulics"}
+  },
+  {
+    "id": "man_electrical_fault",
+    "text": "Electrical system power fault troubleshooting: Abnormal current draw spikes exceeding 15 Amperes or irregular voltage fluctuations suggest electrical short-circuiting or winding failure. Action: Measure current draw across all three phase windings. Verify winding isolation resistance using a megohmmeter. Inspect power cable insulation.",
+    "metadata": {"source": "Electrical Manual Section 5.8", "category": "current", "target_system": "Power Winding"}
+  },
+  {
+    "id": "man_cooling_clog",
+    "text": "Cooling fan and radiator maintenance: Inadequate air flow results in radiator heat dissipation failure. Ensure external filters are vacuumed weekly. Clean dust and debris buildup from internal cooling fans. Replace cooling fan motors showing current draws exceeding 2.0 Amperes.",
+    "metadata": {"source": "Thermal Systems Manual Section 1.9", "category": "temperature", "target_system": "Cooling System"}
+  }
+]

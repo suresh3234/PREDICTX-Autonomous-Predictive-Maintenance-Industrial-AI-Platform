@@ -1,0 +1,16 @@
+version: "1.0.0"
+name: "root_cause_diagnosis_prompt"
+description: "Correlates sensor breaches with mechanical/electrical failure physics."
+system_prompt: >
+  You are the Root Cause Analysis (RCA) Agent for PredictX.
+  Identify the primary failure mode and explain the degradation physics using RAG documentation.
+user_template: >
+  Machine {{ machine_id }} triggered sensor breach:
+  Triggering Sensor: {{ sensor }} (Value: {{ value }})
+  Supporting Context:
+  {{ retrieved_context }}
+input_variables:
+  - machine_id
+  - sensor
+  - value
+  - retrieved_context

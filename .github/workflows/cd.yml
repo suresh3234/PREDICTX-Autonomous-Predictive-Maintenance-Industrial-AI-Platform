@@ -1,0 +1,41 @@
+name: PredictX CD Pipeline
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  deploy-production:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2
+
+    - name: Build, tag, and push images to ECR
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        IMAGE_TAG: ${{ github.ref_name }}
+      run: |
+        docker build -t $ECR_REGISTRY/predictx-api:$IMAGE_TAG -f infrastructure/docker/Dockerfile.api .
+        docker build -t $ECR_REGISTRY/predictx-web:$IMAGE_TAG -f infrastructure/docker/Dockerfile.web .
+        docker push $ECR_REGISTRY/predictx-api:$IMAGE_TAG
+        docker push $ECR_REGISTRY/predictx-web:$IMAGE_TAG
+
+    - name: Update Kubernetes Deployments
+      run: |
+        aws eks update-kubeconfig --region us-east-1 --name predictx-prod-cluster
+        kubectl set image deployment/predictx-api api=$ECR_REGISTRY/predictx-api:${{ github.ref_name }} -n predictx
+        kubectl set image deployment/predictx-web web=$ECR_REGISTRY/predictx-web:${{ github.ref_name }} -n predictx
+        kubectl rollout status deployment/predictx-api -n predictx
+        kubectl rollout status deployment/predictx-web -n predictx

@@ -1,0 +1,445 @@
+{
+    "anomaly_detection": {
+        "1.0.0": {
+            "version": "1.0.0",
+            "status": "PRODUCTION",
+            "metrics": {
+                "F1-Score": 0.95
+            },
+            "hyperparameters": {
+                "nu": 0.05
+            },
+            "dataset_lineage": "data/synthetic/sensor_readings.csv",
+            "created_at": "2026-08-28T16:12:53.309870Z",
+            "artifacts": {
+                "model": "ml/registry/store\\anomaly_detection\\1.0.0\\model_best_anomaly_detector.pkl",
+                "scaler": "ml/registry/store\\anomaly_detection\\1.0.0\\scaler_anomaly_scaler.pkl"
+            },
+            "transition_audit": [
+                {
+                    "from_status": "NONE",
+                    "to_status": "CANDIDATE",
+                    "timestamp": "2026-08-28T16:12:53.309870Z",
+                    "reason": "Initial model registration as candidate."
+                },
+                {
+                    "from_status": "CANDIDATE",
+                    "to_status": "PRODUCTION",
+                    "timestamp": "2026-08-28T16:12:53.310871Z",
+                    "reason": "Outperformed previous model and passed promotion gates."
+                }
+            ]
+        },
+        "1.0.1": {
+            "version": "1.0.1",
+            "status": "CANDIDATE",
+            "metrics": {
+                "F1-Score": 0.49962602842183995
+            },
+            "hyperparameters": {
+                "nu": 0.1
+            },
+            "dataset_lineage": "C:\\Projects\\PredictX\\data\\synthetic\\sensor_readings.csv",
+            "created_at": "2026-08-28T16:40:39.898481Z",
+            "artifacts": {
+                "model": "C:\\Projects\\PredictX\\ml\\registry\\store\\anomaly_detection\\1.0.1\\model_model.pkl",
+                "scaler": "C:\\Projects\\PredictX\\ml\\registry\\store\\anomaly_detection\\1.0.1\\scaler_scaler.pkl"
+            },
+            "transition_audit": [
+                {
+                    "from_status": "NONE",
+                    "to_status": "CANDIDATE",
+                    "timestamp": "2026-08-28T16:40:39.898481Z",
+                    "reason": "Initial model registration as candidate."
+                }
+            ]
+        },
+        "1.0.2": {
+            "version": "1.0.2",
+            "status": "CANDIDATE",
+            "metrics": {
+                "F1-Score": 0.49962602842183995
+            },
+            "hyperparameters": {
+                "nu": 0.1
+            },
+            "dataset_lineage": "C:\\Projects\\PredictX\\data\\synthetic\\sensor_readings.csv",
+            "created_at": "2026-08-28T16:41:30.592592Z",
+            "artifacts": {
+                "model": "C:\\Projects\\PredictX\\ml\\registry\\store\\anomaly_detection\\1.0.2\\model_model.pkl",
+                "scaler": "C:\\Projects\\PredictX\\ml\\registry\\store\\anomaly_detection\\1.0.2\\scaler_scaler.pkl"
+            },
+            "transition_audit": [
+                {
+                    "from_status": "NONE",
+                    "to_status": "CANDIDATE",
+                    "timestamp": "2026-08-28T16:41:30.592592Z",
+                    "reason": "Initial model registration as candidate."
+                }
+            ]
+        },
+        "1.0.3": {
+            "version": "1.0.3",
+            "status": "CANDIDATE",
+            "metrics": {
+                "F1-Score": 0.49962602842183995
+            },
+            "hyperparameters": {
+                "nu": 0.1
+            },
+            "dataset_lineage": "C:\\Projects\\PredictX\\data\\synthetic\\sensor_readings.csv",
+            "created_at": "2026-08-29T11:57:00.198183Z",
+            "artifacts": {
+                "model": "C:\\Projects\\PredictX\\ml\\registry\\store\\anomaly_detection\\1.0.3\\model_model.pkl",
+                "scaler": "C:\\Projects\\PredictX\\ml\\registry\\store\\anomaly_detection\\1.0.3\\scaler_scaler.pkl"
+            },
+            "transition_audit": [
+                {
+                    "from_status": "NONE",
+                    "to_status": "CANDIDATE",
+                    "timestamp": "2026-08-29T11:57:00.198183Z",
+                    "reason": "Initial model registration as candidate."
+                }
+            ]
+        },
+        "1.0.4": {
+            "version": "1.0.4",
+            "status": "CANDIDATE",
+            "metrics": {
+                "F1-Score": 0.49962602842183995
+            },
+            "hyperparameters": {
+                "nu": 0.1
+            },
+            "dataset_lineage": "C:\\Projects\\PredictX\\data\\synthetic\\sensor_readings.csv",
+            "created_at": "2026-08-29T12:00:24.317890Z",
+            "artifacts": {
+                "model": "C:\\Projects\\PredictX\\ml\\registry\\store\\anomaly_detection\\1.0.4\\model_model.pkl",
+                "scaler": "C:\\Projects\\PredictX\\ml\\registry\\store\\anomaly_detection\\1.0.4\\scaler_scaler.pkl"
+            },
+            "transition_audit": [
+                {
+                    "from_status": "NONE",
+                    "to_status": "CANDIDATE",
+                    "timestamp": "2026-08-29T12:00:24.317890Z",
+                    "reason": "Initial model registration as candidate."
+                }
+            ]
+        },
+        "1.0.5": {
+            "version": "1.0.5",
+            "status": "CANDIDATE",
+            "metrics": {
+                "F1-Score": 0.49962602842183995
+            },
+            "hyperparameters": {
+                "nu": 0.1
+            },
+            "dataset_lineage": "C:\\Projects\\PredictX\\data\\synthetic\\sensor_readings.csv",
+            "created_at": "2026-08-29T15:32:18.795664Z",
+            "artifacts": {
+                "model": "C:\\Projects\\PredictX\\ml\\registry\\store\\anomaly_detection\\1.0.5\\model_model.pkl",
+                "scaler": "C:\\Projects\\PredictX\\ml\\registry\\store\\anomaly_detection\\1.0.5\\scaler_scaler.pkl"
+            },
+            "transition_audit": [
+                {
+                    "from_status": "NONE",
+                    "to_status": "CANDIDATE",
+                    "timestamp": "2026-08-29T15:32:18.795664Z",
+                    "reason": "Initial model registration as candidate."
+                }
+            ]
+        },
+        "1.0.6": {
+            "version": "1.0.6",
+            "status": "CANDIDATE",
+            "metrics": {
+                "F1-Score": 0.49962602842183995
+            },
+            "hyperparameters": {
+                "nu": 0.1
+            },
+            "dataset_lineage": "C:\\Projects\\PredictX\\data\\synthetic\\sensor_readings.csv",
+            "created_at": "2026-08-29T15:36:52.394656Z",
+            "artifacts": {
+                "model": "C:\\Projects\\PredictX\\ml\\registry\\store\\anomaly_detection\\1.0.6\\model_model.pkl",
+                "scaler": "C:\\Projects\\PredictX\\ml\\registry\\store\\anomaly_detection\\1.0.6\\scaler_scaler.pkl"
+            },
+            "transition_audit": [
+                {
+                    "from_status": "NONE",
+                    "to_status": "CANDIDATE",
+                    "timestamp": "2026-08-29T15:36:52.394656Z",
+                    "reason": "Initial model registration as candidate."
+                }
+            ]
+        },
+        "1.0.7": {
+            "version": "1.0.7",
+            "status": "CANDIDATE",
+            "metrics": {
+                "F1-Score": 0.49962602842183995
+            },
+            "hyperparameters": {
+                "nu": 0.1
+            },
+            "dataset_lineage": "C:\\Projects\\PredictX\\data\\synthetic\\sensor_readings.csv",
+            "created_at": "2026-08-29T15:42:59.190438Z",
+            "artifacts": {
+                "model": "C:\\Projects\\PredictX\\ml\\registry\\store\\anomaly_detection\\1.0.7\\model_model.pkl",
+                "scaler": "C:\\Projects\\PredictX\\ml\\registry\\store\\anomaly_detection\\1.0.7\\scaler_scaler.pkl"
+            },
+            "transition_audit": [
+                {
+                    "from_status": "NONE",
+                    "to_status": "CANDIDATE",
+                    "timestamp": "2026-08-29T15:42:59.190438Z",
+                    "reason": "Initial model registration as candidate."
+                }
+            ]
+        },
+        "1.0.8": {
+            "version": "1.0.8",
+            "status": "CANDIDATE",
+            "metrics": {
+                "F1-Score": 0.95
+            },
+            "hyperparameters": {
+                "nu": 0.05
+            },
+            "dataset_lineage": "data/synthetic/sensor_readings.csv",
+            "created_at": "2026-08-29T15:49:21.097842Z",
+            "artifacts": {
+                "model": "ml/registry/store\\anomaly_detection\\1.0.8\\model_best_anomaly_detector.pkl",
+                "scaler": "ml/registry/store\\anomaly_detection\\1.0.8\\scaler_anomaly_scaler.pkl"
+            },
+            "transition_audit": [
+                {
+                    "from_status": "NONE",
+                    "to_status": "CANDIDATE",
+                    "timestamp": "2026-08-29T15:49:21.097842Z",
+                    "reason": "Initial model registration as candidate."
+                }
+            ]
+        },
+        "1.0.9": {
+            "version": "1.0.9",
+            "status": "CANDIDATE",
+            "metrics": {
+                "F1-Score": 0.49962602842183995
+            },
+            "hyperparameters": {
+                "nu": 0.1
+            },
+            "dataset_lineage": "C:\\Projects\\PredictX\\data\\synthetic\\sensor_readings.csv",
+            "created_at": "2026-08-29T16:10:20.037743Z",
+            "artifacts": {
+                "model": "C:\\Projects\\PredictX\\ml\\registry\\store\\anomaly_detection\\1.0.9\\model_model.pkl",
+                "scaler": "C:\\Projects\\PredictX\\ml\\registry\\store\\anomaly_detection\\1.0.9\\scaler_scaler.pkl"
+            },
+            "transition_audit": [
+                {
+                    "from_status": "NONE",
+                    "to_status": "CANDIDATE",
+                    "timestamp": "2026-08-29T16:10:20.037743Z",
+                    "reason": "Initial model registration as candidate."
+                }
+            ]
+        }
+    },
+    "failure_classification": {
+        "1.0.0": {
+            "version": "1.0.0",
+            "status": "PRODUCTION",
+            "metrics": {
+                "F1-Score (0.5)": 0.88
+            },
+            "hyperparameters": {
+                "n_estimators": 100,
+                "optimal_threshold": 0.35
+            },
+            "dataset_lineage": "data/synthetic/sensor_readings.csv",
+            "created_at": "2026-08-28T16:12:53.321382Z",
+            "artifacts": {
+                "model": "ml/registry/store\\failure_classification\\1.0.0\\model_best_failure_threat_model.pkl",
+                "scaler": "ml/registry/store\\failure_classification\\1.0.0\\scaler_classification_scaler.pkl"
+            },
+            "transition_audit": [
+                {
+                    "from_status": "NONE",
+                    "to_status": "CANDIDATE",
+                    "timestamp": "2026-08-28T16:12:53.321382Z",
+                    "reason": "Initial model registration as candidate."
+                },
+                {
+                    "from_status": "CANDIDATE",
+                    "to_status": "PRODUCTION",
+                    "timestamp": "2026-08-28T16:12:53.322383Z",
+                    "reason": "Outperformed previous model and passed promotion gates."
+                }
+            ]
+        },
+        "1.0.1": {
+            "version": "1.0.1",
+            "status": "CANDIDATE",
+            "metrics": {
+                "F1-Score (0.5)": 0.6901605024424284
+            },
+            "hyperparameters": {
+                "n_estimators": 100,
+                "optimal_threshold": 0.4
+            },
+            "dataset_lineage": "C:\\Projects\\PredictX\\data\\synthetic\\sensor_readings.csv",
+            "created_at": "2026-08-29T11:26:01.668412Z",
+            "artifacts": {
+                "model": "C:\\Projects\\PredictX\\ml\\registry\\store\\failure_classification\\1.0.1\\model_model.pkl",
+                "scaler": "C:\\Projects\\PredictX\\ml\\registry\\store\\failure_classification\\1.0.1\\scaler_scaler.pkl"
+            },
+            "transition_audit": [
+                {
+                    "from_status": "NONE",
+                    "to_status": "CANDIDATE",
+                    "timestamp": "2026-08-29T11:26:01.668412Z",
+                    "reason": "Initial model registration as candidate."
+                }
+            ]
+        },
+        "1.0.2": {
+            "version": "1.0.2",
+            "status": "CANDIDATE",
+            "metrics": {
+                "F1-Score (0.5)": 0.88
+            },
+            "hyperparameters": {
+                "n_estimators": 100,
+                "optimal_threshold": 0.35
+            },
+            "dataset_lineage": "data/synthetic/sensor_readings.csv",
+            "created_at": "2026-08-29T15:49:21.114592Z",
+            "artifacts": {
+                "model": "ml/registry/store\\failure_classification\\1.0.2\\model_best_failure_threat_model.pkl",
+                "scaler": "ml/registry/store\\failure_classification\\1.0.2\\scaler_classification_scaler.pkl"
+            },
+            "transition_audit": [
+                {
+                    "from_status": "NONE",
+                    "to_status": "CANDIDATE",
+                    "timestamp": "2026-08-29T15:49:21.114592Z",
+                    "reason": "Initial model registration as candidate."
+                }
+            ]
+        }
+    },
+    "rul_prediction": {
+        "1.0.0": {
+            "version": "1.0.0",
+            "status": "PRODUCTION",
+            "metrics": {
+                "MAE (hrs)": 2.1
+            },
+            "hyperparameters": {
+                "n_estimators": 100
+            },
+            "dataset_lineage": "data/synthetic/sensor_readings.csv",
+            "created_at": "2026-08-28T16:12:53.340397Z",
+            "artifacts": {
+                "model": "ml/registry/store\\rul_prediction\\1.0.0\\model_best_rul_model.pkl",
+                "scaler": "ml/registry/store\\rul_prediction\\1.0.0\\scaler_rul_scaler.pkl"
+            },
+            "transition_audit": [
+                {
+                    "from_status": "NONE",
+                    "to_status": "CANDIDATE",
+                    "timestamp": "2026-08-28T16:12:53.340397Z",
+                    "reason": "Initial model registration as candidate."
+                },
+                {
+                    "from_status": "CANDIDATE",
+                    "to_status": "PRODUCTION",
+                    "timestamp": "2026-08-28T16:12:53.340397Z",
+                    "reason": "Outperformed previous model and passed promotion gates."
+                }
+            ]
+        },
+        "1.0.1": {
+            "version": "1.0.1",
+            "status": "CANDIDATE",
+            "metrics": {
+                "MAE (hrs)": 2.1
+            },
+            "hyperparameters": {
+                "n_estimators": 100
+            },
+            "dataset_lineage": "data/synthetic/sensor_readings.csv",
+            "created_at": "2026-08-29T15:49:21.147012Z",
+            "artifacts": {
+                "model": "ml/registry/store\\rul_prediction\\1.0.1\\model_best_rul_model.pkl",
+                "scaler": "ml/registry/store\\rul_prediction\\1.0.1\\scaler_rul_scaler.pkl"
+            },
+            "transition_audit": [
+                {
+                    "from_status": "NONE",
+                    "to_status": "CANDIDATE",
+                    "timestamp": "2026-08-29T15:49:21.147012Z",
+                    "reason": "Initial model registration as candidate."
+                }
+            ]
+        }
+    },
+    "sensor_forecasting": {
+        "1.0.0": {
+            "version": "1.0.0",
+            "status": "PRODUCTION",
+            "metrics": {
+                "Average MAE": 1.1
+            },
+            "hyperparameters": {
+                "seq_length": 24
+            },
+            "dataset_lineage": "data/synthetic/sensor_readings.csv",
+            "created_at": "2026-08-28T16:12:53.343399Z",
+            "artifacts": {
+                "model": "ml/registry/store\\sensor_forecasting\\1.0.0\\model_best_forecaster_model.pkl",
+                "scaler": "ml/registry/store\\sensor_forecasting\\1.0.0\\scaler_forecaster_scaler.pkl"
+            },
+            "transition_audit": [
+                {
+                    "from_status": "NONE",
+                    "to_status": "CANDIDATE",
+                    "timestamp": "2026-08-28T16:12:53.343399Z",
+                    "reason": "Initial model registration as candidate."
+                },
+                {
+                    "from_status": "CANDIDATE",
+                    "to_status": "PRODUCTION",
+                    "timestamp": "2026-08-28T16:12:53.344397Z",
+                    "reason": "Outperformed previous model and passed promotion gates."
+                }
+            ]
+        },
+        "1.0.1": {
+            "version": "1.0.1",
+            "status": "CANDIDATE",
+            "metrics": {
+                "Average MAE": 1.1
+            },
+            "hyperparameters": {
+                "seq_length": 24
+            },
+            "dataset_lineage": "data/synthetic/sensor_readings.csv",
+            "created_at": "2026-08-29T15:49:21.152932Z",
+            "artifacts": {
+                "model": "ml/registry/store\\sensor_forecasting\\1.0.1\\model_best_forecaster_model.pkl",
+                "scaler": "ml/registry/store\\sensor_forecasting\\1.0.1\\scaler_forecaster_scaler.pkl"
+            },
+            "transition_audit": [
+                {
+                    "from_status": "NONE",
+                    "to_status": "CANDIDATE",
+                    "timestamp": "2026-08-29T15:49:21.152932Z",
+                    "reason": "Initial model registration as candidate."
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,14 @@
+version: "1.0.0"
+name: "maintenance_planning_prompt"
+description: "Generates actionable engineering SOP work orders with tooling, parts, and downtime."
+system_prompt: >
+  You are the Maintenance Planner Agent for PredictX.
+  Draft step-by-step Standard Operating Procedures (SOPs) and verify required spare parts.
+user_template: >
+  Draft Work Order for Diagnosed Failure: {{ failure_mode }}
+  Target Subsystem: {{ subsystem }}
+  Estimated MTTR Window: {{ max_downtime_hours }} Hours
+input_variables:
+  - failure_mode
+  - subsystem
+  - max_downtime_hours

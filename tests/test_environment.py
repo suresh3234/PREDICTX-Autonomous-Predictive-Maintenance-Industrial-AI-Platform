@@ -1,4 +1,4 @@
-from src.config.settings import settings
+from app.core.config import settings
 
 
 def test_environment():

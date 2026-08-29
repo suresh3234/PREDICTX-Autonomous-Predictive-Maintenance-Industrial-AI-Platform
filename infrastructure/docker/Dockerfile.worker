@@ -1,0 +1,28 @@
+FROM python:3.11-slim as builder
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir --user -r requirements.txt
+
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN groupadd -r predictx && useradd -r -g predictx -d /app -s /sbin/nologin predictx
+
+COPY --from=builder /root/.local /home/predictx/.local
+ENV PATH=/home/predictx/.local/bin:$PATH
+ENV PYTHONPATH=/app
+
+COPY . /app
+RUN chown -R predictx:predictx /app
+
+USER predictx
+
+CMD ["python", "scripts/stream_consumer_worker.py"]

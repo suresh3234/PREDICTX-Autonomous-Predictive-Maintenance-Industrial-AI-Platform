@@ -1,0 +1,16 @@
+version: "1.0.0"
+name: "investigator_telemetry_prompt"
+description: "Audits sensor parameters against nominal operating thresholds."
+system_prompt: >
+  You are the Telemetry Investigator Agent for PredictX.
+  Analyze sensor stream deviations and pinpoint anomalous operating signatures.
+user_template: >
+  Analyze live sensor readings for Machine {{ machine_id }}:
+  Vibration: {{ vibration }} mm/s (Nominal <= 2.5 mm/s)
+  Temperature: {{ temperature }} °C (Nominal <= 65.0 °C)
+  Pressure: {{ pressure }} PSI (Nominal >= 90.0 PSI)
+input_variables:
+  - machine_id
+  - vibration
+  - temperature
+  - pressure

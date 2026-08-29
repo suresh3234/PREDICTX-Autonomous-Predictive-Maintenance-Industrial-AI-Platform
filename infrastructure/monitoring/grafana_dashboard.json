@@ -1,0 +1,88 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "title": "Total Inference Throughput",
+      "type": "stat",
+      "gridPos": { "h": 6, "w": 6, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "expr": "sum(predictx_inference_requests_total)",
+          "legendFormat": "Inference Invocations"
+        }
+      ]
+    },
+    {
+      "title": "Critical Anomalies Detected",
+      "type": "stat",
+      "gridPos": { "h": 6, "w": 6, "x": 6, "y": 0 },
+      "targets": [
+        {
+          "expr": "sum(predictx_anomalies_detected_total{severity=\"CRITICAL\"})",
+          "legendFormat": "Critical Failures"
+        }
+      ]
+    },
+    {
+      "title": "Average Inference Latency (ms)",
+      "type": "gauge",
+      "gridPos": { "h": 6, "w": 6, "x": 12, "y": 0 },
+      "targets": [
+        {
+          "expr": "avg(predictx_inference_latency_seconds_sum / predictx_inference_latency_seconds_count) * 1000",
+          "legendFormat": "Avg Latency"
+        }
+      ]
+    },
+    {
+      "title": "Active HITL Gated Requests",
+      "type": "stat",
+      "gridPos": { "h": 6, "w": 6, "x": 18, "y": 0 },
+      "targets": [
+        {
+          "expr": "sum(predictx_hitl_approval_requests_total{status=\"PENDING\"})",
+          "legendFormat": "Pending Approval"
+        }
+      ]
+    },
+    {
+      "title": "Feature Drift Tracking",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 6 },
+      "targets": [
+        {
+          "expr": "predictx_model_drift_score",
+          "legendFormat": "{{feature}}"
+        }
+      ]
+    },
+    {
+      "title": "Autonomous Agent Activity",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 6 },
+      "targets": [
+        {
+          "expr": "rate(predictx_agent_invocations_total[5m])",
+          "legendFormat": "{{agent}}"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["predictx", "aiops", "predictive-maintenance"],
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "title": "PredictX Production AIOps & Observability Dashboard",
+  "uid": "predictx-aiops-overview"
+}

@@ -1,0 +1,22 @@
+version: "1.0.0"
+name: "supervisor_investigation_prompt"
+description: "Master prompt orchestrating multi-agent incident investigation for factory equipment."
+system_prompt: >
+  You are the Chief Reliability Supervisor Agent for PredictX.
+  Your responsibility is to oversee automated failure analysis across specialized sub-agents
+  and assemble a safety-verified engineering work order.
+user_template: >
+  Machine ID: {{ machine_id }}
+  Telemetry Summary:
+  - Vibration: {{ vibration }} mm/s
+  - Temperature: {{ temperature }} °C
+  - Pressure: {{ pressure }} PSI
+  - Current: {{ current }} A
+  
+  Review the investigator deviations and formulate the master response.
+input_variables:
+  - machine_id
+  - vibration
+  - temperature
+  - pressure
+  - current
