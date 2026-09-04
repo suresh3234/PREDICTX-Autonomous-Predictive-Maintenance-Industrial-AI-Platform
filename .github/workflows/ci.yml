@@ -30,7 +30,7 @@ jobs:
 
     - name: Run Pytest Test Suite
       env:
-        PYTHONPATH: .
+        PYTHONPATH: .:apps/api
       run: |
         pytest --cov=src --cov=apps/api --cov=ml --cov=rag --cov=agents --cov=mcp --cov-report=xml
 
