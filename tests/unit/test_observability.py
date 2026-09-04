@@ -1,9 +1,9 @@
-import pytest
 from fastapi.testclient import TestClient
+
 from apps.api.app.main import app
+from src.observability.aiops_correlator import AIOpsIncidentCorrelator
 from src.observability.metrics import PrometheusMetricsCollector
 from src.observability.tracing import PredictXTracer
-from src.observability.aiops_correlator import AIOpsIncidentCorrelator
 
 
 def test_prometheus_metrics_collection_and_format():

@@ -1,15 +1,14 @@
 import os
+import pickle
 import sys
 from pathlib import Path
-import pickle
 
 ROOT_PATH = Path(__file__).resolve().parents[1]
 if str(ROOT_PATH) not in sys.path:
     sys.path.insert(0, str(ROOT_PATH))
 
-import numpy as np
 import pandas as pd
-from sklearn.metrics import classification_report, f1_score, precision_score, recall_score, roc_auc_score
+from sklearn.metrics import f1_score, precision_score, recall_score, roc_auc_score
 from sklearn.preprocessing import StandardScaler
 
 from ml.anomaly.models import (

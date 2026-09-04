@@ -1,6 +1,8 @@
 import time
-from typing import Any, Optional
+from typing import Any
+
 import numpy as np
+
 from rag.embeddings.embedder import CachedEmbedder
 
 
@@ -10,14 +12,14 @@ class SemanticCache:
     Uses dense vector similarity to serve instant cached responses for semantically equivalent questions.
     """
 
-    def __init__(self, embedder: Optional[CachedEmbedder] = None, similarity_threshold: float = 0.95):
+    def __init__(self, embedder: CachedEmbedder | None = None, similarity_threshold: float = 0.95):
         self.embedder = embedder or CachedEmbedder()
         self.similarity_threshold = similarity_threshold
         self._cache_entries: list[dict[str, Any]] = []
         self._hits = 0
         self._misses = 0
 
-    def get(self, query: str, threshold: Optional[float] = None) -> Optional[dict[str, Any]]:
+    def get(self, query: str, threshold: float | None = None) -> dict[str, Any] | None:
         """
         Retrieves cached response if a semantically similar query is found.
         """
@@ -50,7 +52,7 @@ class SemanticCache:
         self._misses += 1
         return None
 
-    def set(self, query: str, response: str, metadata: Optional[dict[str, Any]] = None):
+    def set(self, query: str, response: str, metadata: dict[str, Any] | None = None):
         """
         Stores query, embedding vector, and response in the semantic cache.
         """

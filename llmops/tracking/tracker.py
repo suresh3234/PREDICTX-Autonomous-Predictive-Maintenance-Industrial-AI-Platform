@@ -1,5 +1,6 @@
 import time
-from typing import Any, Optional
+from typing import Any
+
 import numpy as np
 
 
@@ -26,7 +27,7 @@ class TokenUsageTracker:
         completion_tokens: int,
         latency_ms: float,
         status: str = "SUCCESS",
-        metadata: Optional[dict[str, Any]] = None,
+        metadata: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         """
         Records an LLM execution event and calculates inference cost.

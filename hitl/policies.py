@@ -1,11 +1,12 @@
-from enum import Enum
-from typing import Any, Optional
+from enum import StrEnum
+from typing import Any
 
 
-class RiskTier(str, Enum):
+class RiskTier(StrEnum):
     AUTONOMOUS = "AUTONOMOUS"
     HUMAN_REVIEW_RECOMMENDED = "HUMAN_REVIEW_RECOMMENDED"
     MANDATORY_HUMAN_APPROVAL = "MANDATORY_HUMAN_APPROVAL"
+
 
 
 class ActionRiskPolicyEngine:
@@ -41,7 +42,7 @@ class ActionRiskPolicyEngine:
 
     @classmethod
     def evaluate_action(
-        cls, action_type: str, details: Optional[dict[str, Any]] = None
+        cls, action_type: str, details: dict[str, Any] | None = None
     ) -> dict[str, Any]:
         """
         Classifies an action into safety risk tiers.

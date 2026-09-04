@@ -1,6 +1,7 @@
-import time
 import logging
-from typing import Any, Callable, Optional
+import time
+from collections.abc import Callable
+from typing import Any
 
 from llmops.cache.semantic_cache import SemanticCache
 from llmops.tracking.tracker import TokenUsageTracker
@@ -15,8 +16,8 @@ class ResilientLLMRouter:
 
     def __init__(
         self,
-        cache: Optional[SemanticCache] = None,
-        tracker: Optional[TokenUsageTracker] = None,
+        cache: SemanticCache | None = None,
+        tracker: TokenUsageTracker | None = None,
         failure_threshold: int = 3,
         cooldown_seconds: float = 30.0,
     ):
@@ -52,7 +53,7 @@ class ResilientLLMRouter:
         self,
         query: str,
         primary_callable: Callable[[], str],
-        fallback_callable: Optional[Callable[[], str]] = None,
+        fallback_callable: Callable[[], str] | None = None,
         model_name: str = "gemini-1.5-flash",
     ) -> dict[str, Any]:
         """

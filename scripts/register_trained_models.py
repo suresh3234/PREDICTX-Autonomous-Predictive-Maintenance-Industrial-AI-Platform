@@ -9,6 +9,7 @@ if str(ROOT_PATH) not in sys.path:
 
 from ml.registry.manager import ModelRegistryManager
 
+
 def register_models():
     registry_dir = "ml/registry/store"
     manager = ModelRegistryManager(base_dir=registry_dir)

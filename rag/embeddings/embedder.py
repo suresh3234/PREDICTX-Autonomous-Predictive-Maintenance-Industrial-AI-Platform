@@ -1,6 +1,6 @@
 import hashlib
+
 import numpy as np
-from typing import Optional, Union
 
 try:
     from sentence_transformers import SentenceTransformer
@@ -24,7 +24,7 @@ class CachedEmbedder:
     def _hash_text(self, text: str) -> str:
         return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
-    def encode(self, texts: Union[str, list[str]], normalize: bool = True) -> np.ndarray:
+    def encode(self, texts: str | list[str], normalize: bool = True) -> np.ndarray:
         """
         Encodes a single text or list of texts into normalized embedding vectors.
         """
@@ -53,7 +53,9 @@ class CachedEmbedder:
                 np.random.seed(42)
                 new_embs = np.random.randn(len(uncached_texts), 384)
 
-            for idx, text_str, emb in zip(uncached_indices, uncached_texts, new_embs):
+            for idx, text_str, emb in zip(
+                uncached_indices, uncached_texts, new_embs, strict=False
+            ):
                 if normalize:
                     emb = emb / (np.linalg.norm(emb) + 1e-8)
                 self.cache[self._hash_text(text_str)] = emb

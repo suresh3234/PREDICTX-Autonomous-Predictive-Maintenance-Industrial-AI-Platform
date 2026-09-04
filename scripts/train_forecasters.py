@@ -1,7 +1,7 @@
 import os
+import pickle
 import sys
 from pathlib import Path
-import pickle
 
 ROOT_PATH = Path(__file__).resolve().parents[1]
 if str(ROOT_PATH) not in sys.path:

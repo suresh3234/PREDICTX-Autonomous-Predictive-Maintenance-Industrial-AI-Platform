@@ -1,14 +1,14 @@
-import pytest
 from pathlib import Path
+
 from rag.engine import AdvancedRAGEngine
-from rag.evaluation.evaluator import RAGEvaluator
 from rag.evaluation.benchmark import RAGBenchmarkSuite
+from rag.evaluation.evaluator import RAGEvaluator
 
 
 def test_context_relevance_metric():
     evaluator = RAGEvaluator()
     query = "How to replace defective ball bearings on high vibration?"
-    
+
     relevant_context = [
         {"text": "Abnormal vibration exceeding 3.5 mm/s requires immediate bearing replacement and lubrication."}
     ]
@@ -43,7 +43,7 @@ def test_faithfulness_metric():
 def test_answer_relevance_metric():
     evaluator = RAGEvaluator()
     query = "What is the recommended bolt torque for pressure housing?"
-    
+
     relevant_answer = "Retorque all loose bolts on the pressure housing to 120 Nm."
     irrelevant_answer = "Today is Tuesday and the weather is partly cloudy."
 

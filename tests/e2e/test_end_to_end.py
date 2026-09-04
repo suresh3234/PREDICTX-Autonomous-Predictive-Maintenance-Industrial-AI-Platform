@@ -1,19 +1,17 @@
-import pytest
-from fastapi.testclient import TestClient
-import pandas as pd
 import numpy as np
+import pandas as pd
+from fastapi.testclient import TestClient
 
-from apps.api.app.main import app
-from ml.features.pipelines import FeaturePipeline
-from ml.classification.models import FailureThreatClassifier
-from ml.anomaly.models import IsolationForestDetector
-from ml.rul.models import RandomForestRULRegressor
-from rag.vector_store import HybridRetriever
-from rag.generator import RAGGenerator
 from agents.supervisor.supervisor import SupervisorAgent
-from hitl.policies import ActionRiskPolicyEngine, RiskTier
+from apps.api.app.main import app
 from hitl.approval_gate import ApprovalGateManager
 from hitl.audit_trail import ImmutableAuditTrail
+from ml.anomaly.models import IsolationForestDetector
+from ml.classification.models import FailureThreatClassifier
+from ml.features.pipelines import FeaturePipeline
+from ml.rul.models import RandomForestRULRegressor
+from rag.generator import RAGGenerator
+from rag.vector_store import HybridRetriever
 from src.security.auth import create_access_token, decode_access_token
 
 
@@ -45,7 +43,7 @@ def test_full_platform_end_to_end_pipeline():
             "last_maintenance": "2026-08-17 00:00:00",
         })
     raw_df = pd.DataFrame(records)
-    
+
     pipeline = FeaturePipeline(rolling_windows=[3])
     feat_df = pipeline.transform(raw_df, drop_na=False)
     assert "feature_temp_x_vib" in feat_df.columns

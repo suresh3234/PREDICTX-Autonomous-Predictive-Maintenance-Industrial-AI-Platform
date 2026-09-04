@@ -1,5 +1,6 @@
 import logging
-from typing import Any, Optional
+from typing import Any
+
 from rag.engine import AdvancedRAGEngine
 
 logger = logging.getLogger("PredictX.Agent.RootCause")
@@ -39,7 +40,7 @@ class RootCauseAgent:
         },
     }
 
-    def __init__(self, rag_engine: Optional[AdvancedRAGEngine] = None):
+    def __init__(self, rag_engine: AdvancedRAGEngine | None = None):
         self.rag_engine = rag_engine
 
     def diagnose_root_cause(self, investigator_report: dict[str, Any]) -> dict[str, Any]:

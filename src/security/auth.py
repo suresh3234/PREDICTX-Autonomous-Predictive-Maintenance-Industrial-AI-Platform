@@ -1,10 +1,10 @@
+import base64
 import hashlib
 import hmac
 import json
-import base64
 import time
-from datetime import datetime, timedelta
-from typing import Any, Optional
+from datetime import timedelta
+from typing import Any
 
 # Secret key for JWT signing (configured via env in production)
 JWT_SECRET_KEY = "predictx-industrial-ai-secret-key-change-in-production"
@@ -12,7 +12,7 @@ JWT_ALGORITHM = "HS256"
 DEFAULT_ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
 
-def hash_password(password: str, salt: Optional[str] = None) -> str:
+def hash_password(password: str, salt: str | None = None) -> str:
     """
     PBKDF2-HMAC-SHA256 password hashing.
     """
@@ -51,8 +51,8 @@ def _base64url_decode(data_str: str) -> bytes:
 def create_access_token(
     subject: str,
     role: str = "VIEWER",
-    expires_delta: Optional[timedelta] = None,
-    extra_claims: Optional[dict[str, Any]] = None,
+    expires_delta: timedelta | None = None,
+    extra_claims: dict[str, Any] | None = None,
 ) -> str:
     """
     Creates a cryptographically signed HMAC-SHA256 JWT access token.

@@ -1,6 +1,4 @@
-import time
 from collections import defaultdict
-from typing import Any, Optional
 
 
 class PrometheusMetricsCollector:

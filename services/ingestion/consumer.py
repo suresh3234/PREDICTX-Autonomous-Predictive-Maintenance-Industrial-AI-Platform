@@ -1,8 +1,10 @@
 import json
 import logging
 import time
+from collections.abc import Callable
 from datetime import datetime
-from typing import Any, Callable, Optional
+from typing import Any
+
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -71,7 +73,7 @@ class TelemetryConsumer:
         else:
             self.mock_mode = True
 
-    def _get_machine_id(self, db: Session, machine_code: str) -> Optional[int]:
+    def _get_machine_id(self, db: Session, machine_code: str) -> int | None:
         """Resolves machine_code to database machine ID with local caching."""
         if machine_code in self.machine_cache:
             return self.machine_cache[machine_code]
@@ -82,7 +84,7 @@ class TelemetryConsumer:
             return machine.id
         return None
 
-    def process_record(self, raw_record: dict[str, Any], db: Session) -> Optional[TelemetryLog]:
+    def process_record(self, raw_record: dict[str, Any], db: Session) -> TelemetryLog | None:
         """
         Parses and validates a single telemetry record into a database model instance.
         """
@@ -135,7 +137,7 @@ class TelemetryConsumer:
         )
         return log_entry
 
-    def save_batch(self, records: list[dict[str, Any]], db: Optional[Session] = None) -> int:
+    def save_batch(self, records: list[dict[str, Any]], db: Session | None = None) -> int:
         """
         Persists a batch of telemetry records to the database.
         """
@@ -167,7 +169,7 @@ class TelemetryConsumer:
             if session_created:
                 db.close()
 
-    def consume_loop(self, max_batches: Optional[int] = None, on_record_callback: Optional[Callable] = None):
+    def consume_loop(self, max_batches: int | None = None, on_record_callback: Callable | None = None):
         """
         Main streaming loop with micro-batch flushing.
         """
@@ -188,7 +190,7 @@ class TelemetryConsumer:
                 msg_pack = self.consumer.poll(timeout_ms=500, max_records=self.batch_size)
                 now = time.time()
 
-                for tp, messages in msg_pack.items():
+                for _tp, messages in msg_pack.items():
                     for msg in messages:
                         if msg.value:
                             batch.append(msg.value)

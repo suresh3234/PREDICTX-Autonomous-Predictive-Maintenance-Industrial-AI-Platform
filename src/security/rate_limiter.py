@@ -1,6 +1,5 @@
 import time
 from collections import defaultdict
-from typing import Tuple
 
 
 class SlidingWindowRateLimiter:
@@ -19,7 +18,7 @@ class SlidingWindowRateLimiter:
         client_id: str,
         limit: int = None,
         window_seconds: float = None,
-    ) -> Tuple[bool, int, float]:
+    ) -> tuple[bool, int, float]:
         """
         Determines if a request from client_id is within rate limits.
         Returns: (is_allowed, remaining_quota, retry_after_seconds)

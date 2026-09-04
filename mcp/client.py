@@ -1,13 +1,12 @@
-import json
 import logging
-from typing import Any, Optional
+from typing import Any
 
+from mcp.alert_server.server import AlertMCPServer
 from mcp.base import MCPServerBase
-from mcp.sensor_server.server import SensorMCPServer
 from mcp.database_server.server import DatabaseMCPServer
 from mcp.knowledge_server.server import KnowledgeMCPServer
 from mcp.maintenance_server.server import MaintenanceMCPServer
-from mcp.alert_server.server import AlertMCPServer
+from mcp.sensor_server.server import SensorMCPServer
 
 logger = logging.getLogger("PredictX.MCP.Client")
 

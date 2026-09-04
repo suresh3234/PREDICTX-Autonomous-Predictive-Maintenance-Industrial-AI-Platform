@@ -1,6 +1,5 @@
 import logging
-from typing import Any, Optional
-import numpy as np
+from typing import Any
 
 from ml.features.pipelines import FeaturePipeline
 from ml.registry.manager import ModelRegistryManager
@@ -23,7 +22,7 @@ class InvestigatorAgent:
         "load": {"normal_max": 80.0, "warning_max": 90.0, "unit": "%"},
     }
 
-    def __init__(self, registry_manager: Optional[ModelRegistryManager] = None):
+    def __init__(self, registry_manager: ModelRegistryManager | None = None):
         self.registry_manager = registry_manager
         self.feature_pipeline = FeaturePipeline()
 
@@ -107,7 +106,7 @@ class InvestigatorAgent:
             "deviations": deviations,
         }
 
-    def investigate(self, telemetry: dict[str, Any], predictions: Optional[dict[str, Any]] = None) -> dict[str, Any]:
+    def investigate(self, telemetry: dict[str, Any], predictions: dict[str, Any] | None = None) -> dict[str, Any]:
         """
         Executes full sensor and predictive investigation.
         """

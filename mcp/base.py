@@ -1,7 +1,8 @@
 import inspect
 import json
 import logging
-from typing import Any, Callable, Optional
+from collections.abc import Callable
+from typing import Any
 
 logger = logging.getLogger("PredictX.MCP.Base")
 
@@ -23,7 +24,7 @@ class MCPServerBase:
         name: str,
         func: Callable,
         description: str,
-        input_schema: Optional[dict[str, Any]] = None,
+        input_schema: dict[str, Any] | None = None,
     ):
         """
         Registers a tool function into the MCP server registry.
@@ -37,15 +38,15 @@ class MCPServerBase:
                 if param_name in ["self", "cls"]:
                     continue
                 param_type = "string"
-                if param.annotation == int:
+                if param.annotation is int:
                     param_type = "integer"
-                elif param.annotation == float:
+                elif param.annotation is float:
                     param_type = "number"
-                elif param.annotation == bool:
+                elif param.annotation is bool:
                     param_type = "boolean"
-                elif param.annotation == list:
+                elif param.annotation is list:
                     param_type = "array"
-                elif param.annotation == dict:
+                elif param.annotation is dict:
                     param_type = "object"
 
                 properties[param_name] = {"type": param_type}
@@ -66,7 +67,7 @@ class MCPServerBase:
         }
         logger.info(f"Registered MCP tool: '{name}' on server '{self.name}'")
 
-    def tool(self, name: Optional[str] = None, description: str = "", input_schema: Optional[dict[str, Any]] = None):
+    def tool(self, name: str | None = None, description: str = "", input_schema: dict[str, Any] | None = None):
         """Decorator for registering an MCP tool."""
         def decorator(func: Callable):
             tool_name = name or func.__name__

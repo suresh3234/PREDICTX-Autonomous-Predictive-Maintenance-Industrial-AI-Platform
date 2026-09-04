@@ -1,10 +1,12 @@
-from enum import Enum
-from typing import Any, Optional
+from enum import StrEnum
+from typing import Any
+
 from fastapi import Header, HTTPException, status
+
 from src.security.auth import decode_access_token
 
 
-class Role(str, Enum):
+class Role(StrEnum):
     VIEWER = "VIEWER"
     OPERATOR = "OPERATOR"
     ENGINEER = "ENGINEER"
@@ -28,7 +30,7 @@ def has_permission(user_role: str, min_required_role: Role) -> bool:
     return u_level >= req_level
 
 
-def get_current_user(authorization: Optional[str] = Header(None)) -> dict[str, Any]:
+def get_current_user(authorization: str | None = Header(None)) -> dict[str, Any]:
     """
     FastAPI dependency that extracts and validates the JWT bearer token.
     """
@@ -55,7 +57,7 @@ def get_current_user(authorization: Optional[str] = Header(None)) -> dict[str, A
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=str(e),
             headers={"WWW-Authenticate": "Bearer"},
-        )
+        ) from e
 
 
 def require_role(min_role: Role):

@@ -1,6 +1,6 @@
 import logging
 from pathlib import Path
-from typing import Any, Optional, Union
+from typing import Any
 
 from rag.chunking.chunker import RecursiveChunker
 from rag.parsing.parser import DocumentParser
@@ -20,10 +20,10 @@ class AdvancedRAGEngine:
 
     def __init__(
         self,
-        retriever: Optional[HybridRetriever] = None,
-        chunker: Optional[RecursiveChunker] = None,
-        query_expander: Optional[QueryExpander] = None,
-        reranker: Optional[CrossEncoderReranker] = None,
+        retriever: HybridRetriever | None = None,
+        chunker: RecursiveChunker | None = None,
+        query_expander: QueryExpander | None = None,
+        reranker: CrossEncoderReranker | None = None,
     ):
         self.retriever = retriever or HybridRetriever()
         self.chunker = chunker or RecursiveChunker(chunk_size=150, chunk_overlap=30)
@@ -42,7 +42,7 @@ class AdvancedRAGEngine:
         logger.info(f"Successfully indexed {len(chunks)} contextual chunks.")
         return len(chunks)
 
-    def index_file_or_directory(self, path_str: Union[str, Path]) -> int:
+    def index_file_or_directory(self, path_str: str | Path) -> int:
         """
         Parses all manual files in a directory or a single file and indexes them.
         """

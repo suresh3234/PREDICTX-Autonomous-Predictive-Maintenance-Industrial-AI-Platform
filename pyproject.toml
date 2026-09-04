@@ -16,6 +16,12 @@ ignore = [
     "B008", # do not perform function call Depends in argument defaults
     "E501", # line too long (handled by black)
 ]
+[tool.ruff.lint.per-file-ignores]
+"scripts/*" = ["E402"]
+"tests/*" = ["E402"]
+"apps/worker/*" = ["E402"]
+"database/seeds/*" = ["E402"]
+"apps/api/*" = ["E402", "B904"]
 
 [tool.ruff.lint.isort]
 combine-as-imports = true

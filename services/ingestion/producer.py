@@ -1,8 +1,10 @@
 import json
 import logging
 import time
+from collections.abc import Callable
 from pathlib import Path
-from typing import Any, Callable, Optional
+from typing import Any
+
 import pandas as pd
 
 try:
@@ -60,8 +62,8 @@ class TelemetryProducer:
         self,
         telemetry: dict[str, Any],
         topic: str = "sensor-telemetry-raw",
-        on_success: Optional[Callable] = None,
-        on_error: Optional[Callable] = None,
+        on_success: Callable | None = None,
+        on_error: Callable | None = None,
     ) -> bool:
         """
         Sends a telemetry record keyed by machine_id.
@@ -116,7 +118,7 @@ class TelemetryProducer:
         csv_path: str,
         topic: str = "sensor-telemetry-raw",
         rate_hz: float = 10.0,
-        max_records: Optional[int] = None,
+        max_records: int | None = None,
     ) -> int:
         """
         Streams records from a historical CSV dataset into Kafka at a specified frequency.

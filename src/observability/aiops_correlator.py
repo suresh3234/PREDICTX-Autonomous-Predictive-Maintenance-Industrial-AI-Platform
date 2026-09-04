@@ -1,6 +1,6 @@
 import time
 import uuid
-from typing import Any, Optional
+from typing import Any
 
 
 class AIOpsIncidentCorrelator:
@@ -46,7 +46,7 @@ class AIOpsIncidentCorrelator:
         Clusters alerts originating within the same operational plant zone.
         """
         zone_alerts = [a for a in self.recent_alerts if a["zone"] == zone]
-        machines = list(set(a["machine_id"] for a in zone_alerts))
+        machines = list({a["machine_id"] for a in zone_alerts})
         critical_count = sum(1 for a in zone_alerts if a["severity"] == "CRITICAL")
 
         is_cascade = len(machines) >= 2 and critical_count >= 1

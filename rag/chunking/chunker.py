@@ -27,7 +27,7 @@ class RecursiveChunker:
 
         chunks = []
         step = max(self.chunk_size - self.chunk_overlap, 1)
-        
+
         for i in range(0, len(words), step):
             chunk_words = words[i : i + self.chunk_size]
             if not chunk_words:

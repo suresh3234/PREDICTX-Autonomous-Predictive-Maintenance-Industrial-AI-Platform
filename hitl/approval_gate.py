@@ -1,7 +1,8 @@
 import logging
 import uuid
+from collections.abc import Callable
 from datetime import datetime, timedelta
-from typing import Any, Callable, Optional
+from typing import Any
 
 logger = logging.getLogger("PredictX.HITL.ApprovalGate")
 
@@ -22,9 +23,9 @@ class ApprovalGateManager:
         action_type: str,
         machine_id: str,
         justification: str,
-        action_payload: Optional[dict[str, Any]] = None,
-        on_approved_callback: Optional[Callable] = None,
-        timeout_minutes: Optional[int] = None,
+        action_payload: dict[str, Any] | None = None,
+        on_approved_callback: Callable | None = None,
+        timeout_minutes: int | None = None,
     ) -> dict[str, Any]:
         """
         Creates a new pending human approval request.
@@ -53,7 +54,7 @@ class ApprovalGateManager:
         logger.info(f"Created HITL approval request {req_id} for '{action_type}' on {machine_id}")
         return request_record
 
-    def get_request(self, request_id: str) -> Optional[dict[str, Any]]:
+    def get_request(self, request_id: str) -> dict[str, Any] | None:
         """Retrieves and checks expiration status of a request."""
         req = self.requests.get(request_id)
         if not req:

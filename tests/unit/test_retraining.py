@@ -25,7 +25,7 @@ def retraining_setup(tmp_path):
     # We populate columns matching raw schema
     data_len = 100
     rul = np.tile(np.linspace(10.0, 0.0, 20), 5)
-    
+
     # Correlate temperature and vibration with low RUL (RUL <= 4.0) to make the model perform well
     temperature = np.where(rul <= 4.0, np.random.normal(loc=65.0, scale=1.0, size=data_len), np.random.normal(loc=50.0, scale=1.0, size=data_len))
     vibration = np.where(rul <= 4.0, np.random.normal(loc=25.0, scale=0.2, size=data_len), np.random.normal(loc=20.0, scale=0.2, size=data_len))

@@ -1,4 +1,4 @@
-from typing import Any, Optional
+from typing import Any
 
 try:
     from sentence_transformers import CrossEncoder
@@ -50,7 +50,7 @@ class CrossEncoderReranker:
 
         # Attach rerank score and sort
         reranked_docs = []
-        for doc, score in zip(documents, scores):
+        for doc, score in zip(documents, scores, strict=False):
             doc_copy = dict(doc)
             doc_copy["rerank_score"] = float(score)
             reranked_docs.append(doc_copy)

@@ -1,7 +1,7 @@
 import logging
 import uuid
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any
 
 from agents.investigator.investigator import InvestigatorAgent
 from agents.maintenance.planner import MaintenancePlannerAgent
@@ -25,12 +25,12 @@ class SupervisorAgent:
 
     def __init__(
         self,
-        investigator: Optional[InvestigatorAgent] = None,
-        root_cause_agent: Optional[RootCauseAgent] = None,
-        maintenance_planner: Optional[MaintenancePlannerAgent] = None,
-        verifier: Optional[VerificationAgent] = None,
-        rag_engine: Optional[AdvancedRAGEngine] = None,
-        registry_manager: Optional[ModelRegistryManager] = None,
+        investigator: InvestigatorAgent | None = None,
+        root_cause_agent: RootCauseAgent | None = None,
+        maintenance_planner: MaintenancePlannerAgent | None = None,
+        verifier: VerificationAgent | None = None,
+        rag_engine: AdvancedRAGEngine | None = None,
+        registry_manager: ModelRegistryManager | None = None,
     ):
         self.investigator = investigator or InvestigatorAgent(registry_manager=registry_manager)
         self.root_cause_agent = root_cause_agent or RootCauseAgent(rag_engine=rag_engine)
@@ -38,7 +38,7 @@ class SupervisorAgent:
         self.verifier = verifier or VerificationAgent()
 
     def run_investigation(
-        self, telemetry: dict[str, Any], predictions: Optional[dict[str, Any]] = None
+        self, telemetry: dict[str, Any], predictions: dict[str, Any] | None = None
     ) -> dict[str, Any]:
         """
         Coordinates full multi-agent collaborative investigation.

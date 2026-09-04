@@ -1,5 +1,5 @@
-from typing import Optional
-from fastapi import APIRouter, HTTPException, Header, status
+
+from fastapi import APIRouter, Header, HTTPException, status
 from pydantic import BaseModel
 
 from hitl.approval_gate import ApprovalGateManager
@@ -15,7 +15,7 @@ gate_manager = ApprovalGateManager(default_timeout_minutes=30)
 audit_trail = ImmutableAuditTrail()
 
 
-def _get_user_role_from_header(authorization: Optional[str]) -> tuple[str, str]:
+def _get_user_role_from_header(authorization: str | None) -> tuple[str, str]:
     """Helper to extract user and role from Bearer token if provided."""
     if not authorization:
         return "system", "ENGINEER"
@@ -32,7 +32,7 @@ def _get_user_role_from_header(authorization: Optional[str]) -> tuple[str, str]:
 class ApprovePayload(BaseModel):
     request_id: str
     approver_id: str
-    notes: Optional[str] = "Approved by certified reliability engineer."
+    notes: str | None = "Approved by certified reliability engineer."
 
 
 class RejectPayload(BaseModel):
@@ -44,7 +44,7 @@ class RejectPayload(BaseModel):
 class EvaluateActionPayload(BaseModel):
     action_type: str
     machine_id: str
-    details: Optional[dict] = None
+    details: dict | None = None
 
 
 @router.post("/evaluate")
@@ -62,10 +62,10 @@ def list_pending_requests():
 
 
 @router.post("/approve")
-def approve_request(payload: ApprovePayload, authorization: Optional[str] = Header(None)):
+def approve_request(payload: ApprovePayload, authorization: str | None = Header(None)):
     """Submits technician approval for a pending action with RBAC validation."""
     username, role = _get_user_role_from_header(authorization)
-    
+
     # Enforce minimum role ENGINEER for approval
     if not has_permission(role, Role.ENGINEER):
         raise HTTPException(
@@ -95,10 +95,10 @@ def approve_request(payload: ApprovePayload, authorization: Optional[str] = Head
 
 
 @router.post("/reject")
-def reject_request(payload: RejectPayload, authorization: Optional[str] = Header(None)):
+def reject_request(payload: RejectPayload, authorization: str | None = Header(None)):
     """Rejects a proposed action with technician rationale and RBAC validation."""
     username, role = _get_user_role_from_header(authorization)
-    
+
     # Enforce minimum role ENGINEER for rejection
     if not has_permission(role, Role.ENGINEER):
         raise HTTPException(
@@ -128,7 +128,7 @@ def reject_request(payload: RejectPayload, authorization: Optional[str] = Header
 
 
 @router.get("/audit")
-def get_audit_trail(machine_id: Optional[str] = None):
+def get_audit_trail(machine_id: str | None = None):
     """Retrieves the immutable audit trail and integrity verification status."""
     is_valid = audit_trail.verify_chain_integrity()
     history = audit_trail.get_history(machine_id)

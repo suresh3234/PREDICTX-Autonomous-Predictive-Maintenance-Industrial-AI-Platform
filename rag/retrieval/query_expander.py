@@ -1,5 +1,3 @@
-import re
-from typing import Optional
 
 
 class QueryExpander:
@@ -26,7 +24,7 @@ class QueryExpander:
         "rpm": ["spindle speed", "rotational frequency", "motor drive"],
     }
 
-    def __init__(self, custom_synonyms: Optional[dict] = None):
+    def __init__(self, custom_synonyms: dict | None = None):
         self.synonyms = {**self.DOMAIN_SYNONYMS, **(custom_synonyms or {})}
 
     def expand(self, query: str) -> str:

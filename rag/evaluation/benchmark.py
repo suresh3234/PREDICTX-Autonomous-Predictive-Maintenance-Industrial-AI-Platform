@@ -1,7 +1,7 @@
 import json
 import logging
 from pathlib import Path
-from typing import Any, Optional, Union
+from typing import Any
 
 from rag.engine import AdvancedRAGEngine
 from rag.evaluation.evaluator import RAGEvaluator
@@ -15,14 +15,14 @@ class RAGBenchmarkSuite:
     Computes Hit Rate@K, Mean Reciprocal Rank (MRR), and RAG Triad metrics across golden datasets.
     """
 
-    def __init__(self, evaluator: Optional[RAGEvaluator] = None):
+    def __init__(self, evaluator: RAGEvaluator | None = None):
         self.evaluator = evaluator or RAGEvaluator()
 
     def run_benchmark(
         self,
         rag_engine: AdvancedRAGEngine,
-        dataset_path: Union[str, Path],
-        generator: Optional[Any] = None,
+        dataset_path: str | Path,
+        generator: Any | None = None,
         top_k: int = 3,
     ) -> dict[str, Any]:
         """
@@ -32,7 +32,7 @@ class RAGBenchmarkSuite:
         if not path.exists():
             raise FileNotFoundError(f"Evaluation dataset not found at {dataset_path}")
 
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             dataset = json.load(f)
 
         results = []

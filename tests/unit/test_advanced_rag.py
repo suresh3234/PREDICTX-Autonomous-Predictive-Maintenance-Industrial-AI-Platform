@@ -1,11 +1,9 @@
-import pytest
-from pathlib import Path
-from rag.parsing.parser import DocumentParser
 from rag.chunking.chunker import RecursiveChunker
 from rag.embeddings.embedder import CachedEmbedder
-from rag.retrieval.query_expander import QueryExpander
-from rag.reranking.reranker import CrossEncoderReranker
 from rag.engine import AdvancedRAGEngine
+from rag.parsing.parser import DocumentParser
+from rag.reranking.reranker import CrossEncoderReranker
+from rag.retrieval.query_expander import QueryExpander
 
 
 def test_document_parser_markdown():
@@ -26,7 +24,7 @@ Inspect coolant radiator lines for clogging."""
 def test_recursive_chunker():
     chunker = RecursiveChunker(chunk_size=10, chunk_overlap=3)
     text = "Word1 Word2 Word3 Word4 Word5 Word6 Word7 Word8 Word9 Word10 Word11 Word12 Word13 Word14 Word15"
-    
+
     doc = {"id": "test_doc", "text": text, "metadata": {"category": "test"}}
     chunks = chunker.chunk_document(doc)
 

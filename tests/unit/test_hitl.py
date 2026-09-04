@@ -1,9 +1,9 @@
-import pytest
 from fastapi.testclient import TestClient
+
 from apps.api.app.main import app
-from hitl.policies import ActionRiskPolicyEngine, RiskTier
 from hitl.approval_gate import ApprovalGateManager
 from hitl.audit_trail import ImmutableAuditTrail
+from hitl.policies import ActionRiskPolicyEngine, RiskTier
 
 
 def test_action_risk_policy_evaluation():

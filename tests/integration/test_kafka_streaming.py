@@ -1,12 +1,11 @@
+
 import pytest
-from datetime import datetime
-from unittest.mock import MagicMock
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import sessionmaker
 
 from app.db.models import Base, Machine, TelemetryLog
-from services.ingestion.producer import TelemetryProducer
 from services.ingestion.consumer import TelemetryConsumer
+from services.ingestion.producer import TelemetryProducer
 
 
 @pytest.fixture

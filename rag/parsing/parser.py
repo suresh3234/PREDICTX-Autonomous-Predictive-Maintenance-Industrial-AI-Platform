@@ -1,7 +1,7 @@
 import json
 import re
 from pathlib import Path
-from typing import Any, Union
+from typing import Any
 
 
 class DocumentParser:
@@ -11,7 +11,7 @@ class DocumentParser:
     """
 
     @staticmethod
-    def parse_file(file_path: Union[str, Path]) -> list[dict[str, Any]]:
+    def parse_file(file_path: str | Path) -> list[dict[str, Any]]:
         """Parses a document file based on its extension."""
         path = Path(file_path)
         if not path.exists():
@@ -28,7 +28,7 @@ class DocumentParser:
     @staticmethod
     def parse_json_file(file_path: Path) -> list[dict[str, Any]]:
         """Parses structured JSON manual files."""
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, encoding="utf-8") as f:
             data = json.load(f)
 
         if isinstance(data, list):
@@ -106,13 +106,13 @@ class DocumentParser:
 
     @staticmethod
     def parse_markdown_file(file_path: Path) -> list[dict[str, Any]]:
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, encoding="utf-8") as f:
             content = f.read()
         return DocumentParser.parse_markdown(content, source_name=file_path.name)
 
     @staticmethod
     def parse_text_file(file_path: Path) -> list[dict[str, Any]]:
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, encoding="utf-8") as f:
             content = f.read()
         # Split by double newline paragraphs
         paragraphs = [p.strip() for p in content.split("\n\n") if p.strip()]

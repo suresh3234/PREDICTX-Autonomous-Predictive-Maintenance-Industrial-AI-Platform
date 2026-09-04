@@ -1,6 +1,8 @@
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
+
 import pandas as pd
+
 from mcp.base import MCPServerBase
 
 
@@ -9,7 +11,7 @@ class SensorMCPServer(MCPServerBase):
     MCP Server for Industrial IoT Sensor Telemetry Streams.
     """
 
-    def __init__(self, data_path: Optional[str] = None):
+    def __init__(self, data_path: str | None = None):
         super().__init__(name="predictx-sensor-server", version="1.0.0")
         root = Path(__file__).resolve().parents[2]
         self.data_path = Path(data_path) if data_path else (root / "data" / "synthetic" / "sensor_readings.csv")

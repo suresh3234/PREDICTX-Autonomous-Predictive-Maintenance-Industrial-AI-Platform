@@ -1,6 +1,5 @@
-import re
 import html
-from typing import Any
+import re
 
 
 class InputSanitizer:

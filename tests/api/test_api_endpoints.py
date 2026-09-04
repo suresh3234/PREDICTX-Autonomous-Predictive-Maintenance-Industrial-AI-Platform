@@ -1,6 +1,6 @@
 import sys
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 
 # Add root directory to sys.path programmatically
 ROOT_PATH = Path(__file__).resolve().parents[2]
@@ -16,10 +16,10 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
-from app.main import app
 from app.db import Base
-from app.db.session import get_db
 from app.db.models import Machine, TelemetryLog
+from app.db.session import get_db
+from app.main import app
 
 # Setup memory SQLite DB
 SQLALCHEMY_DATABASE_URL = "sqlite://"

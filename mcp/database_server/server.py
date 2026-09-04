@@ -1,8 +1,9 @@
-from typing import Any, Optional
+from typing import Any
+
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.db.models import Machine, TelemetryLog
+from app.db.models import Machine
 from app.db.session import SessionLocal
 from mcp.base import MCPServerBase
 

@@ -1,6 +1,8 @@
 import re
+from typing import Any
+
 import numpy as np
-from typing import Any, Optional, Union
+
 from rag.embeddings.embedder import CachedEmbedder
 
 
@@ -13,7 +15,7 @@ class RAGEvaluator:
     3. Answer Relevance (Intent Fulfillment)
     """
 
-    def __init__(self, embedder: Optional[CachedEmbedder] = None):
+    def __init__(self, embedder: CachedEmbedder | None = None):
         self.embedder = embedder or CachedEmbedder()
 
     def _split_into_claims(self, text: str) -> list[str]:
@@ -30,7 +32,7 @@ class RAGEvaluator:
         stem = word[:4] if len(word) >= 5 else word
         return any(w.startswith(stem) or stem in w for w in word_set)
 
-    def evaluate_context_relevance(self, query: str, contexts: list[Union[str, dict[str, Any]]]) -> float:
+    def evaluate_context_relevance(self, query: str, contexts: list[str | dict[str, Any]]) -> float:
         """
         Measures the degree to which retrieved contexts are relevant to the query.
         Returns a score in [0.0, 1.0].
@@ -62,7 +64,7 @@ class RAGEvaluator:
         score = 0.5 * min(overlap_score, 1.0) + 0.5 * semantic_score
         return round(float(score), 4)
 
-    def evaluate_faithfulness(self, answer: str, contexts: list[Union[str, dict[str, Any]]]) -> float:
+    def evaluate_faithfulness(self, answer: str, contexts: list[str | dict[str, Any]]) -> float:
         """
         Measures the proportion of claims in the generated answer that are supported
         by the retrieved context (Hallucination Detection).
@@ -126,7 +128,7 @@ class RAGEvaluator:
         return round(float(min(relevance, 1.0)), 4)
 
     def evaluate_rag_triad(
-        self, query: str, contexts: list[Union[str, dict[str, Any]]], answer: str
+        self, query: str, contexts: list[str | dict[str, Any]], answer: str
     ) -> dict[str, Any]:
         """
         Computes the complete RAG Triad score card.

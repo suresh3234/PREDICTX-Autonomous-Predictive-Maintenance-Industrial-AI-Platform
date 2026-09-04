@@ -1,16 +1,15 @@
 import json
-import pytest
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from app.db.models import Base, Machine
-from mcp.base import MCPServerBase
-from mcp.sensor_server.server import SensorMCPServer
-from mcp.database_server.server import DatabaseMCPServer
-from mcp.knowledge_server.server import KnowledgeMCPServer
-from mcp.maintenance_server.server import MaintenanceMCPServer
 from mcp.alert_server.server import AlertMCPServer
+from mcp.base import MCPServerBase
 from mcp.client import MCPClient
+from mcp.database_server.server import DatabaseMCPServer
+from mcp.maintenance_server.server import MaintenanceMCPServer
+from mcp.sensor_server.server import SensorMCPServer
 
 
 def test_mcp_base_tool_registration():
@@ -46,7 +45,7 @@ def test_sensor_mcp_server(tmp_path):
     )
 
     sensor_server = SensorMCPServer(data_path=str(csv_file))
-    
+
     # Test get_latest_telemetry
     res = sensor_server.call_tool("get_latest_telemetry", {"machine_id": "M1000"})
     data = json.loads(res["content"][0]["text"])

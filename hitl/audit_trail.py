@@ -2,7 +2,7 @@ import hashlib
 import json
 import logging
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any
 
 logger = logging.getLogger("PredictX.HITL.AuditTrail")
 
@@ -43,7 +43,7 @@ class ImmutableAuditTrail:
         actor_id: str,
         machine_id: str,
         action: str,
-        details: Optional[dict[str, Any]] = None,
+        details: dict[str, Any] | None = None,
         outcome: str = "SUCCESS",
     ) -> dict[str, Any]:
         """
@@ -90,7 +90,7 @@ class ImmutableAuditTrail:
 
         return True
 
-    def get_history(self, machine_id: Optional[str] = None) -> list[dict[str, Any]]:
+    def get_history(self, machine_id: str | None = None) -> list[dict[str, Any]]:
         """Retrieves audit trail history with optional machine filtering."""
         if machine_id:
             return [b for b in self.chain if b.get("machine_id") in [machine_id, "GLOBAL"]]

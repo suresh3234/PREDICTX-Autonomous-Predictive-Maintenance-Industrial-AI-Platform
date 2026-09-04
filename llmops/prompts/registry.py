@@ -1,6 +1,7 @@
 import re
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
+
 import yaml
 
 
@@ -10,7 +11,7 @@ class PromptRegistry:
     Loads, tracks, and renders versioned LLM prompts with variable validation.
     """
 
-    def __init__(self, prompts_dir: Optional[str] = None):
+    def __init__(self, prompts_dir: str | None = None):
         root = Path(__file__).resolve().parents[2]
         self.prompts_dir = Path(prompts_dir) if prompts_dir else (root / "prompts")
         self._templates: dict[str, dict[str, Any]] = {}
@@ -24,7 +25,7 @@ class PromptRegistry:
         for yaml_file in self.prompts_dir.glob("*/*.yaml"):
             agent_name = yaml_file.parent.name
             try:
-                with open(yaml_file, "r", encoding="utf-8") as f:
+                with open(yaml_file, encoding="utf-8") as f:
                     data = yaml.safe_load(f)
                     version = data.get("version", yaml_file.stem)
                     key = f"{agent_name}:{version}"

@@ -1,5 +1,6 @@
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
+
 from mcp.base import MCPServerBase
 from rag.engine import AdvancedRAGEngine
 
@@ -9,11 +10,11 @@ class KnowledgeMCPServer(MCPServerBase):
     MCP Server for Technical Manuals and Standard Operating Procedure (SOP) Retrieval.
     """
 
-    def __init__(self, rag_engine: Optional[AdvancedRAGEngine] = None):
+    def __init__(self, rag_engine: AdvancedRAGEngine | None = None):
         super().__init__(name="predictx-knowledge-server", version="1.0.0")
         root = Path(__file__).resolve().parents[2]
         self.manuals_path = root / "data" / "knowledge" / "manuals.json"
-        
+
         if rag_engine:
             self.rag_engine = rag_engine
         else:

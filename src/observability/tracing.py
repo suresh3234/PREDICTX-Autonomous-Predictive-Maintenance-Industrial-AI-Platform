@@ -1,7 +1,7 @@
 import contextvars
 import time
 import uuid
-from typing import Any, Optional
+from typing import Any
 
 
 class Span:
@@ -14,8 +14,8 @@ class Span:
         name: str,
         trace_id: str,
         span_id: str,
-        parent_span_id: Optional[str] = None,
-        attributes: Optional[dict[str, Any]] = None,
+        parent_span_id: str | None = None,
+        attributes: dict[str, Any] | None = None,
     ):
         self.name = name
         self.trace_id = trace_id
@@ -24,13 +24,13 @@ class Span:
         self.attributes = attributes or {}
         self.events: list[dict[str, Any]] = []
         self.start_time = time.time()
-        self.end_time: Optional[float] = None
+        self.end_time: float | None = None
         self.status = "UNSET"
 
     def set_attribute(self, key: str, value: Any):
         self.attributes[key] = value
 
-    def add_event(self, name: str, attributes: Optional[dict[str, Any]] = None):
+    def add_event(self, name: str, attributes: dict[str, Any] | None = None):
         self.events.append({
             "name": name,
             "timestamp": time.time(),
@@ -73,16 +73,16 @@ class PredictXTracer:
         self.service_name = service_name
         self.completed_spans: list[Span] = []
 
-    def start_span(self, name: str, attributes: Optional[dict[str, Any]] = None) -> "SpanContextManager":
+    def start_span(self, name: str, attributes: dict[str, Any] | None = None) -> "SpanContextManager":
         return SpanContextManager(self, name, attributes)
 
 
 class SpanContextManager:
-    def __init__(self, tracer: PredictXTracer, name: str, attributes: Optional[dict[str, Any]] = None):
+    def __init__(self, tracer: PredictXTracer, name: str, attributes: dict[str, Any] | None = None):
         self.tracer = tracer
         self.name = name
         self.attributes = attributes or {}
-        self.span: Optional[Span] = None
+        self.span: Span | None = None
         self.token = None
 
     def __enter__(self) -> Span:

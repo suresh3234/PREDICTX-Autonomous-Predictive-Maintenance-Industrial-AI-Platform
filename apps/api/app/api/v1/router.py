@@ -1,38 +1,35 @@
-import sys
-import os
 import json
-import uuid
 import math
-from datetime import datetime, timezone
+import sys
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
+
+import pandas as pd
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-import pandas as pd
-import numpy as np
 
 # Add the PredictX repository root to sys.path programmatically
 ROOT_PATH = Path(__file__).resolve().parents[5]
 if str(ROOT_PATH) not in sys.path:
     sys.path.insert(0, str(ROOT_PATH))
 
-from app.db.models import Machine, TelemetryLog
-from app.db.session import get_db
-
-from ml.registry.manager import ModelRegistryManager
-from ml.retraining.pipeline import RetrainingPipeline
-from ml.monitoring.drift import DataDriftDetector
-from ml.features.pipelines import FeaturePipeline
-from rag.vector_store import HybridRetriever
-from rag.generator import RAGGenerator
-from rag.engine import AdvancedRAGEngine
 from agents.copilot import AgenticCopilot
 from agents.supervisor.supervisor import SupervisorAgent
-from mcp.client import MCPClient
-from app.api.v1.hitl_router import router as hitl_router
 from app.api.v1.auth_router import router as auth_router
+from app.api.v1.hitl_router import router as hitl_router
+from app.db.models import Machine, TelemetryLog
+from app.db.session import get_db
+from mcp.client import MCPClient
+from ml.features.pipelines import FeaturePipeline
+from ml.monitoring.drift import DataDriftDetector
+from ml.registry.manager import ModelRegistryManager
+from ml.retraining.pipeline import RetrainingPipeline
+from rag.engine import AdvancedRAGEngine
+from rag.generator import RAGGenerator
+from rag.vector_store import HybridRetriever
 
 router = APIRouter()
 router.include_router(hitl_router)
@@ -91,19 +88,19 @@ class MachineCreate(BaseModel):
 
 
 class TelemetryInput(BaseModel):
-    machine_code: Optional[str] = "M1000"
+    machine_code: str | None = "M1000"
     temperature: float = Field(default=68.5, description="Operating temperature in Celsius")
     vibration: float = Field(default=1.85, description="RMS vibration in mm/s")
     pressure: float = Field(default=102.0, description="Hydraulic/pneumatic pressure in PSI")
     rpm: float = Field(default=1520.0, description="Rotational speed in RPM")
     voltage: float = Field(default=398.0, description="Line voltage in Volts")
     current: float = Field(default=10.2, description="Operating current in Amperes")
-    power: Optional[float] = Field(default=4.06, description="Active power in kW")
-    humidity: Optional[float] = Field(default=48.0, description="Ambient humidity percentage")
-    load: Optional[float] = Field(default=75.0, description="Machine operating load percentage")
-    operating_hours: Optional[float] = Field(default=1240.0, description="Total cumulative runtime hours")
-    maintenance_count: Optional[int] = Field(default=2, description="Count of past maintenance interventions")
-    last_maintenance: Optional[str] = None
+    power: float | None = Field(default=4.06, description="Active power in kW")
+    humidity: float | None = Field(default=48.0, description="Ambient humidity percentage")
+    load: float | None = Field(default=75.0, description="Machine operating load percentage")
+    operating_hours: float | None = Field(default=1240.0, description="Total cumulative runtime hours")
+    maintenance_count: int | None = Field(default=2, description="Count of past maintenance interventions")
+    last_maintenance: str | None = None
 
 
 class CopilotQueryPayload(BaseModel):
@@ -121,13 +118,13 @@ class RAGSearchPayload(BaseModel):
 
 
 class AgentInvestigatePayload(BaseModel):
-    machine_code: Optional[str] = "M1000"
-    telemetry: Optional[Dict[str, Any]] = None
+    machine_code: str | None = "M1000"
+    telemetry: dict[str, Any] | None = None
 
 
 class MCPExecutePayload(BaseModel):
     tool_name: str
-    arguments: Dict[str, Any] = {}
+    arguments: dict[str, Any] = {}
 
 
 # ----------------- MACHINE ENDPOINTS -----------------
@@ -226,10 +223,10 @@ def predict_direct(telemetry: TelemetryInput):
     try:
         data = telemetry.model_dump()
         power = data.get("power") or (data["voltage"] * data["current"] * 0.85 / 1000.0)
-        
+
         telemetry_dict = {
             "machine_id": data.get("machine_code", "M1000"),
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "temperature": float(data["temperature"]),
             "vibration": float(data["vibration"]),
             "pressure": float(data["pressure"]),
@@ -241,7 +238,7 @@ def predict_direct(telemetry: TelemetryInput):
             "load": float(data.get("load", 75.0)),
             "operating_hours": float(data.get("operating_hours", 1200.0)),
             "maintenance_count": int(data.get("maintenance_count", 2)),
-            "last_maintenance": data.get("last_maintenance") or (datetime.now(timezone.utc).isoformat()),
+            "last_maintenance": data.get("last_maintenance") or (datetime.now(UTC).isoformat()),
             "failure": 0,
             "failure_type": "Normal"
         }
@@ -396,7 +393,7 @@ def list_registered_models():
             return {"models": []}
         with open(reg_file) as f:
             registry_data = json.load(f)
-        
+
         formatted_models = []
         for task, versions in registry_data.items():
             for ver, details in versions.items():
@@ -431,13 +428,13 @@ def get_data_drift_status():
         X_base = df_feat[feature_cols].values
 
         drift_detector = DataDriftDetector(X_base, feature_cols)
-        
+
         # Test against the tail of the dataset
         df_tail = feature_pipeline.transform(df.tail(150), drop_na=True)
         X_test = df_tail[feature_cols].values
-        
+
         drift_results = drift_detector.detect_drift(X_test)
-        
+
         feature_details = []
         for col, p_val in drift_results.get("feature_p_values", {}).items():
             feature_details.append({
@@ -454,7 +451,7 @@ def get_data_drift_status():
             "total_features": len(feature_cols),
             "p_value_threshold": 0.05,
             "feature_drift_metrics": feature_details[:12],
-            "timestamp": datetime.now(timezone.utc).isoformat()
+            "timestamp": datetime.now(UTC).isoformat()
         })
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -765,5 +762,5 @@ def get_observability_stats():
         "active_critical_alerts": 1,
         "active_warning_alerts": 2,
         "total_inferences_24h": 864000,
-        "timestamp": datetime.now(timezone.utc).isoformat()
+        "timestamp": datetime.now(UTC).isoformat()
     }

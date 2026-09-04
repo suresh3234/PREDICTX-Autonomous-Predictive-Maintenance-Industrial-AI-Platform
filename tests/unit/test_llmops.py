@@ -1,8 +1,7 @@
-import pytest
-from llmops.prompts.registry import PromptRegistry
 from llmops.cache.semantic_cache import SemanticCache
-from llmops.tracking.tracker import TokenUsageTracker
+from llmops.prompts.registry import PromptRegistry
 from llmops.routing.router import ResilientLLMRouter
+from llmops.tracking.tracker import TokenUsageTracker
 
 
 def test_prompt_registry_loading_and_render():
