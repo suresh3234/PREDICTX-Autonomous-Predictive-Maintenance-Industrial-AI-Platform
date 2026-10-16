@@ -14,6 +14,8 @@ __pycache__/
 data/raw/*
 data/processed/*
 data/synthetic/*
+!data/synthetic/sensor_readings.csv
+!data/synthetic/machines.csv
 
 models/
 mlruns/

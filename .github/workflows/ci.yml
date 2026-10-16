@@ -28,6 +28,10 @@ jobs:
         pip install -r requirements.txt
         pip install pytest pytest-cov
 
+    - name: Ensure baseline sensor data exists
+      run: |
+        python -c "from pathlib import Path; p = Path('data/synthetic/sensor_readings.csv'); import subprocess, sys; subprocess.run([sys.executable, 'scripts/generate_sensor_data.py']) if not p.exists() else None"
+
     - name: Run Pytest Test Suite
       env:
         PYTHONPATH: .:apps/api
